@@ -29,3 +29,18 @@ repeat{
     let numberPadKey = Int.random(in: 1...3)
     virtualBankSystem.makeAccount(numberPadKey: numberPadKey)
 } while virtualBankSystem.accountType == ""
+            struct BankAccount{
+    var debitBalance = 0
+    var creditBalance = 0
+    let creditLimit = 100
+    
+    var debitBalanceInfo: String{
+        return "Debit balance: $\(debitBalance)"
+    }
+    var availableCredit: Int{
+        return creditLimit+creditBalance
+    }
+    var creditBalanceInfo: String{
+        return "Available credit: $\(availableCredit)"
+    }
+}
