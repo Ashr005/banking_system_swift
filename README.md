@@ -3,4 +3,4 @@ This is a banking system made with swift, Xcode
 
 
 Images are added for reference
-- banking starter.png
+- banking app starter.png
