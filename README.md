@@ -2,5 +2,5 @@
 This is a banking system made with swift, Xcode
 
 
-Images are added for reference
+NOTE : **Images are added for reference**
 - banking app starter.png
