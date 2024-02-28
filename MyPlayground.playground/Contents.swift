@@ -22,8 +22,39 @@ class VirtualBankSystem {
         }
         print("You have opened a \(accountType) account.")
     }
-    func moneyTransfer(transfertype: String, transferAmount: Int, bankAccount:in-out){
-        
+    func transferMoney(
+        transferType: String,
+        transferAmount: Int,
+        bankAccount: inout BankAccount
+    ) {
+        switch transferType {
+        case "withdraw":
+            if accountType == "credit" {
+                bankAccount.creditWithdraw(transferAmount)
+            } else if accountType == "debit" {
+                bankAccount.debitWithdraw(transferAmount)
+            }
+        case "deposit":
+            if accountType == "credit" {
+                bankAccount.creditDeposit(transferAmount)
+            } else if accountType == "debit" {
+                bankAccount.debitDeposit(transferAmount)
+            }
+        default:
+            break
+        }
+    }
+    func checkBalance(
+        bankAccount: BankAccount
+    ) {
+        switch accountType {
+        case "credit":
+            print(bankAccount.creditBalanceInfo)
+        case "debit":
+            print(bankAccount.debitBalanceInfo)
+        default:
+            break
+        }
     }
 }
 
@@ -83,3 +114,34 @@ repeat {
 let transferAmount = 50
 print("Transfer amount: $\(transferAmount)")
 var bankAccount = BankAccount()
+
+repeat {
+    print("What would you like to do?")
+    print("1. Check bank account")
+    print("2. Withdraw money")
+    print("3. Deposit money")
+    print("4. Close the system")
+    let option = Int.random(in: 1...5)
+    print("Selected option: \(option).")
+    switch option {
+    case 1:
+        virtualBankSystem.checkBalance(bankAccount: bankAccount)
+    case 2:
+        virtualBankSystem.transferMoney(
+            transferType: "withdraw",
+            transferAmount: transferAmount,
+            bankAccount: &bankAccount
+        )
+    case 3:
+        virtualBankSystem.transferMoney(
+            transferType: "deposit",
+            transferAmount: transferAmount,
+            bankAccount: &bankAccount
+        )
+    case 4:
+        virtualBankSystem.isOpened = false
+        print("The system is closed.")
+    default:
+        break
+    }
+} while virtualBankSystem.isOpened
