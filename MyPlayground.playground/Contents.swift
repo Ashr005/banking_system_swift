@@ -144,4 +144,4 @@ repeat {
     default:
         break
     }
-
+} while virtualBankSystem.isOpened
